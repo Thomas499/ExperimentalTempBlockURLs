@@ -1,6 +1,7 @@
 package com.letsbuildthatapp.kotlinyoutubelbta
 
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.RecyclerView.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,7 @@ import java.lang.reflect.Constructor
  * Created by brianvoong on 12/18/17.
  */
 
-class MainAdapter: RecyclerView.Adapter<CustomViewHolder> {
+class MainAdapter: Adapter<CustomViewHolder>() {
 
     val videoTitles = listOf("First title", "Second", "3rd", "MOOOOORE TITLE")
 
@@ -44,6 +45,6 @@ class MainAdapter: RecyclerView.Adapter<CustomViewHolder> {
 
 }
 
-class CustomViewHolder(val view: View): RecyclerView.ViewHolder(view) {
+class CustomViewHolder(val view: View): ViewHolder(view) {
 
 }
