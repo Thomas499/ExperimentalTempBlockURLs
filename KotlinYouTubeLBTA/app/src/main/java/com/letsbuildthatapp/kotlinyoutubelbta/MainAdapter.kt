@@ -5,12 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.video_row.view.*
+import java.lang.reflect.Constructor
 
 /**
  * Created by brianvoong on 12/18/17.
  */
 
-class MainAdapter: RecyclerView.Adapter<MainAdapter.CustomViewHolder>() {
+class MainAdapter: RecyclerView.Adapter<CustomViewHolder> {
 
     val videoTitles = listOf("First title", "Second", "3rd", "MOOOOORE TITLE")
 
@@ -18,20 +19,26 @@ class MainAdapter: RecyclerView.Adapter<MainAdapter.CustomViewHolder>() {
     override fun getItemCount(): Int {
         return videoTitles.size
     }
+    //override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CustomViewHolder {
+    // how do we even create a view
+    //    val layoutInflater = LayoutInflater.from(parent?.context)
+    //    val cellForRow = layoutInflater.inflate(R.layout.video_row, parent, false)
+    //   return CustomViewHolder(cellForRow)
+    //}
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CustomViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         // how do we even create a view
-        val layoutInflater = LayoutInflater.from(parent?.context)
+        val layoutInflater = LayoutInflater.from(parent.context)
         val cellForRow = layoutInflater.inflate(R.layout.video_row, parent, false)
         return CustomViewHolder(cellForRow)
     }
 
-   // override fun onBindViewHolder(holder: CustomViewHolder?, position: Int) {
+    //override fun onBindViewHolder(holder: CustomViewHolder?, position: Int) {
     //    val videoTitle = videoTitles.get(position)
-    //    holder?.view?.textView_video_title?.text = videoTitle
+    //   holder?.view?.textView_video_title?.text = videoTitle
     //}
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        val videoTitle = videoTitles.get(position)
+        val videoTitle = videoTitles[position]
         holder.view.textView_video_title?.text = videoTitle
     }
 
@@ -40,17 +47,3 @@ class MainAdapter: RecyclerView.Adapter<MainAdapter.CustomViewHolder>() {
 class CustomViewHolder(val view: View): RecyclerView.ViewHolder(view) {
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
