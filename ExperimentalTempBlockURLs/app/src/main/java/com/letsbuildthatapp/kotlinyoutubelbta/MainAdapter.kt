@@ -6,15 +6,17 @@ import android.support.v7.widget.RecyclerView.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.video_row.view.*
+import android.widget.Toast
+import android.widget.ToggleButton
+//import kotlinx.android.synthetic.main.video_row.view.*
+import kotlinx.android.synthetic.main.show_recent_url_rows.view.*
 import java.lang.reflect.Constructor
 
 /**
- * Created by brianvoong on 12/18/17.
+ * Working Demo
  */
 
 class MainAdapter: Adapter<CustomViewHolder>() {
-    //val videoTitles = listOf("First title", "Second", "3rd", "MOOOOORE TITLE")
     private val name_of_url = arrayListOf<String>(
             "www.youtube.com" , "www.google.com" , "pagead2.googlesyndication.com" , "nrdp512appboot.netflix.com"
     )
@@ -33,23 +35,18 @@ class MainAdapter: Adapter<CustomViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         // how do we even create a view
         val layoutInflater = LayoutInflater.from(parent.context)
-        val cellForRow = layoutInflater.inflate(R.layout.video_row, parent, false)
+        val cellForRow = layoutInflater.inflate(R.layout.show_recent_url_rows, parent, false)
 
 
         return CustomViewHolder(cellForRow)
     }
-
-    //override fun onBindViewHolder(holder: CustomViewHolder?, position: Int) {
-    //    val videoTitle = videoTitles.get(position)
-    //   holder?.view?.textView_video_title?.text = videoTitle
-    //}
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
 
         val timestamp = timestamp[position]
         val names = name_of_url[position]
         val blockstatus = blockstatus[position]
         holder.view.timestamp_textView?.text = timestamp
-        holder.view.name_of_url_textView?.text = names //textView_video_title?.text = names
+        holder.view.name_of_url_textView?.text = names
         holder.view.blockstatus_textview?.text = blockstatus
     }
 
@@ -58,7 +55,8 @@ class MainAdapter: Adapter<CustomViewHolder>() {
 //class CustomViewHolder(val view: View): ViewHolder(view) {
 
 //}
-// This will make click reload screen. Think I need to add button in here.
+
+/* This will make click reload screen. Think I need to add button in here.
 class CustomViewHolder(val view: View): RecyclerView.ViewHolder(view) {
 
     init {
@@ -68,4 +66,16 @@ class CustomViewHolder(val view: View): RecyclerView.ViewHolder(view) {
         }
     }
 
+}*/
+class CustomViewHolder(val view: View): ViewHolder(view) {
+    init {
+
+        view.findViewById<ToggleButton>(R.id.tempwhite_blacklist2).setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked)
+                Toast.makeText(this.view.context, "GO!", Toast.LENGTH_SHORT).show()
+            else {
+                Toast.makeText(this.view.context, "STOP!", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 }
